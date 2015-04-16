@@ -1,0 +1,148 @@
+﻿@model SpanTest.Models.PutniNalog
+
+@{
+    ViewBag.Title = "Forma za nalog";
+}
+
+<h2>Putni nalog</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.datepicker.css")" rel="stylesheet" type="text/css" /> 
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>PutniNalog</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartingDay)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.StartingDay, new { Id="from" })
+            @Html.ValidationMessageFor(model => model.StartingDay)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndingDay)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to" })
+            @Html.ValidationMessageFor(model => model.EndingDay)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Vehicle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Vehicle)
+            @Html.ValidationMessageFor(model => model.Vehicle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VehicleRegistration)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VehicleRegistration)
+            @Html.ValidationMessageFor(model => model.VehicleRegistration)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VehicleOwner)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VehicleOwner)
+            @Html.ValidationMessageFor(model => model.VehicleOwner)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Passenger)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Passenger)
+            @Html.ValidationMessageFor(model => model.Passenger)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TravelRelation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TravelRelation)
+            @Html.ValidationMessageFor(model => model.TravelRelation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectNumber)
+            @Html.ValidationMessageFor(model => model.ProjectNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Accommodation)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.Accommodation, new { Id = "AccommodationCheckbox" })
+            @Html.ValidationMessageFor(model => model.Accommodation)
+        </div>
+
+        <div hidden class="accomodation-label">
+            @Html.LabelFor(model => model.AccommodationDays)
+        </div>
+        <div hidden class="accomodation-field">
+            @Html.TextBoxFor(model => model.AccommodationDays, new { id="DaysVisit" })
+            @Html.ValidationMessageFor(model => model.AccommodationDays)
+        </div>
+
+        <div hidden class="accomodation-label">
+            @Html.LabelFor(model => model.AccommodationEntry)
+        </div>
+        <div hidden class="accomodation-field">
+            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date", @readonly="readonly"})
+            @Html.ValidationMessageFor(model => model.AccommodationEntry)
+        </div>
+
+        <div hidden class="accomodation-label">
+            @Html.LabelFor(model => model.AccommodationExit)
+        </div>
+        <div hidden class="accomodation-field">
+            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", @readonly="readonly"})
+            @Html.ValidationMessageFor(model => model.AccommodationExit)
+        </div>
+
+        <div hidden class="accomodation-label">
+            @Html.LabelFor(model => model.Comment)
+        </div>
+        <div hidden class="accomodation-field">
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>

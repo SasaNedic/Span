@@ -1,0 +1,7 @@
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\bin\SpanTest.dll
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\bin\SpanTest.pdb
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\bin\EntityFramework.dll
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\bin\EntityFramework.xml
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\obj\Debug\SpanTest.csprojResolveAssemblyReference.cache
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\obj\Debug\SpanTest.dll
+c:\users\morpheus\documents\visual studio 2010\Projects\SpanTest\SpanTest\obj\Debug\SpanTest.pdb
