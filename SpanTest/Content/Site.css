@@ -191,7 +191,7 @@ textarea {
 }
 
 input[type="text"], 
-input[type="password"] {
+input[type="password"]{
     border: 1px solid #ccc;
     padding: 2px;
     font-size: 1.2em;
