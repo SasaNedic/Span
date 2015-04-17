@@ -26,5 +26,11 @@ namespace SpanTest.Controllers
             Nalog.Accommodation = true;
             return View(Nalog);
         }
+
+        [HttpPost]
+        public ActionResult Email()
+        {
+            return View();
+        }
     }
 }

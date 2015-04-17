@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Email";
+
+    //Loading all items needed from form
+    List<string> agentName = new List<string>();
+    List<string> agentPassenger = new List<string>();
+    List<string> agentStudent = new List<string>();
+    for(int i = 0; i <=10 ;i++){
+        agentName.Add(Request["Name[" + i + "].Name"]);
+        agentPassenger.Add(Request["Name[" + i + "].Passenger"]);
+        agentStudent.Add(Request["Name[" + i + "].Student"]);
+    }
+    var startingDay = Request["StartingDay"];
+    var endingDay = Request["EndingDay"];
+    var vehicle = Request["Vehicle"];
+    
+    var vehicleRegistration="";
+    var vehicleOwner="";
+    if(vehicle == "Automobil")
+    {
+        vehicleRegistration = Request["VehicleRegistration"];
+        vehicleOwner = Request["VehicleOwner"];
+    }
+    
+    var reason = Request["Reason"];
+    var travelRelation = Request["TravelRelation"];
+    var projectNumber = Request["ProjectNumber"];
+    var accommodation = Request["Accommodation"];
+
+    
+    var accommodationEntry = "";
+    var accommodationExit = "";
+    var comment = "";
+    List<string> accommodationNights = new List<string>(30);
+    if(accommodation == "true")
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            accommodationNights.Add(Request["AccommodationNights"+i+".Value"]);
+        }
+        accommodationEntry = Request["AccommodationEntry"];
+        accommodationExit = Request["AccommodationExit"];
+        comment = Request["Comment"];
+    }
+    
+    
+    //creating email body
+    int nonEmptyAgent = 0;
+    foreach(string b in agentName)
+    {
+        if(b != "")
+        {
+            nonEmptyAgent++;
+        }
+    }
+    int passNonStud = 0;
+    for(int i=0; i<agentStudent.Count(); i++)
+    {
+        if(agentStudent[i] == "false" && agentName[i] != "")
+        {
+            passNonStud++;
+        }
+    }
+    
+    
+    string errorMessage="";
+    string EmailBodyText = "Pozdrav, \r\n\r\n Zamolio bih za " + nonEmptyAgent +" ";
+    if(passNonStud == 1)
+    {
+        EmailBodyText = EmailBodyText + "putni nalog za:\r\n";
+    }
+    else if (passNonStud > 1 && passNonStud < 5)
+    {
+        EmailBodyText = EmailBodyText + "putna naloga za:\r\n";
+    }
+    else{
+        EmailBodyText = EmailBodyText + "putnih naloga za:\r\n";
+    }
+    for (int i = 0; i < nonEmptyAgent; i++)
+    {
+        if(agentStudent[i] == "false")
+        {
+            EmailBodyText = EmailBodyText + agentName[i] + "\r\n";
+        }
+    }
+    EmailBodyText = EmailBodyText + "\r\n Putovanje počinje " + startingDay + " te završava " + endingDay + ".\r\n";
+    EmailBodyText = EmailBodyText + "Relacija putovanja je " + travelRelation + ".\r\n";
+
+    EmailBodyText = EmailBodyText + "Sredstvo putovanja će biti " + vehicle;
+    if(vehicle=="Automobil")
+    {
+        EmailBodyText = EmailBodyText + " u vlasništvu " + vehicleOwner + " sa registracijom " + vehicleRegistration + ".\r\n";
+    }
+    
+    if(accommodation == "true")
+    {
+        EmailBodyText = EmailBodyText + "Potreban je i smještaj za ";
+        if(nonEmptyAgent == 1){
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobu za sljedeće datume:\r\n";
+        }
+        else if(nonEmptyAgent >1 && nonEmptyAgent< 5)
+        {
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobe za sljedeće datume:\r\n";
+        }
+        else{
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osoba za sljedeće datume:\r\n";
+        }
+
+        int nonEmptyNights = 0;
+        foreach (string b in accommodationNights)
+        {
+            if (b != "")
+            {
+                nonEmptyNights++;
+            }
+        }
+        
+        for(int i=0; i<nonEmptyNights;i++)
+        {
+            if(i%5==0){
+                EmailBodyText = EmailBodyText + accommodationNights[i] + ",\r\n";
+            }
+            else if(i+1 == accommodationNights.Count()){
+                EmailBodyText = EmailBodyText + accommodationNights[i] + ".\r\n";
+            }
+            else{
+                EmailBodyText = EmailBodyText + accommodationNights[i] + ",";
+            }
+        }
+        EmailBodyText = EmailBodyText + "Smještaj je namjenjen za: ";
+        for(int i=0; i<nonEmptyAgent;i++)
+        {
+            if(agentStudent[i] =="false"){
+                EmailBodyText = EmailBodyText + agentName[i] + "\r\n";
+            }
+            else{
+                EmailBodyText = EmailBodyText + agentName[i] + "(student)\r\n";
+            }
+        }
+        EmailBodyText = EmailBodyText + "U smještaj bi ušli " + accommodationEntry + " te ga napustili " + accommodationExit + ".\r\n\r\n";
+    }
+    EmailBodyText = EmailBodyText + "Razlog putovanja je " + reason + ".\r\n";
+    EmailBodyText = EmailBodyText + "Putovanje se vodi na projekt pod brojem: " + projectNumber + ".\r\n";
+
+    EmailBodyText = EmailBodyText + "Lijep pozdrav, \r\n" + agentName[0];
+    
+    
+        //trying to send the mail
+    try{
+        WebMail.SmtpServer = "your-smtp-host";
+        WebMail.SmtpPort = 25;
+        WebMail.UserName = "your-username-here";
+        WebMail.Password = "your-password-here";
+        WebMail.From = "your-email-here";
+
+        WebMail.Send(to: "trenutno-nebitno@span.eu",
+            subject: "Putni nalog " + travelRelation,
+            body: EmailBodyText,
+            cc: "email-managera@span.eu"
+            );
+    }
+    catch(Exception ex)
+    {
+        errorMessage = ex.Message;
+    }
+}
+<h2>Email</h2>
+<p>@EmailBodyText</p>
+@*@if (errorMessage == "")
+{
+      <p>Message sent</p>
+}
+else
+{
+    <p>Message not sent</p>
+}*@

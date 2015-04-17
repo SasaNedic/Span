@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
     /*----- add textboxes for names -----*/
     $("#addPersonButton").click(function () {
-        if (nameCounter == 9) {
+        if (nameCounter == 10) {
             alert("Možete tražiti putne naloge najviše za 10 ljudi")
         }
         else {
