@@ -10,29 +10,44 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>PutniNalog</legend>
 
-        <div id="NamesGroup">
-            <div hidden class="editor-label">
-                @Html.LabelFor(model => model.Name)
-            </div>
-            <div hidden class="editor-field">
-                @Html.EditorFor(model => model.Name, new { id = "nameEntry" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-            <div id="NamesTextBoxDiv1" class="NamesClass">
-		        <label>Name: </label>
-                <input type="text" name="textbox1" id="textbox1"/>
-                <label>Student: </label>
-                <input type="checkbox" name="checkboxStudent1" id="checkboxStudent1" class="CheckboxStudent"/>
-                <label>Suvozač: </label>
-                <input type="checkbox" name="checkboxPassenger1" id="checkboxPassenger1" class="CheckboxPassenger"/>
-	        </div>
-        </div>
-
+        @for (int i = 0; i < 10; i++)
+        {
+            if (i == 0)
+            {
+                <div class="name-field" id="name-field@(i)">     
+                    @Html.LabelFor(model => model.Name[0].Name)              
+                    @Html.TextBoxFor(model => model.Name[i].Name, new { id = "nameEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Name)
+                    @Html.LabelFor(model => model.Name[0].Passenger)
+                    @Html.CheckBoxFor(model => model.Name[i].Passenger, new { id = "passengerEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Passenger)
+                    @Html.LabelFor(model => model.Name[0].Student)
+                    @Html.CheckBoxFor(model => model.Name[i].Student, new { id = "studentEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Student)
+                </div>
+            }
+            else
+            {
+                <div class="name-field" id="name-field@(i)" hidden=hidden>                   
+                    @Html.LabelFor(model => model.Name[0].Name)              
+                    @Html.TextBoxFor(model => model.Name[i].Name, new { id = "nameEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Name)
+                    @Html.LabelFor(model => model.Name[0].Passenger)
+                    @Html.CheckBoxFor(model => model.Name[i].Passenger, new { id = "passengerEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Passenger)
+                    @Html.LabelFor(model => model.Name[0].Student)
+                    @Html.CheckBoxFor(model => model.Name[i].Student, new { id = "studentEntry" + i })
+                    @Html.ValidationMessageFor(model => model.Name[i].Student)
+                </div>
+            }
+                
+        }
         <input type="button" id="addPersonButton" value="Dodaj osobu"/>
         <input type="button" id="removePersonButton" value="Izbriši osobu"/>
 
@@ -40,7 +55,7 @@
             @Html.LabelFor(model => model.StartingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.StartingDay, new { Id="from" })
+            @Html.TextBoxFor(model => model.StartingDay, new { Id = "from", type = "date", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.StartingDay)
         </div>
 
@@ -48,7 +63,7 @@
             @Html.LabelFor(model => model.EndingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to" })
+            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to", type = "date", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.EndingDay)
         </div>
 
@@ -56,32 +71,24 @@
             @Html.LabelFor(model => model.Vehicle)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Vehicle)
+            @Html.DropDownListFor(model => model.Vehicle, new SelectList(Model.VehicleDropDownList), new { Id = "VehicleType" })
             @Html.ValidationMessageFor(model => model.Vehicle)
         </div>
 
-        <div class="editor-label">
+        <div hidden class="vehicle-label">
             @Html.LabelFor(model => model.VehicleRegistration)
         </div>
-        <div class="editor-field">
+        <div hidden class="vehicle-field">
             @Html.EditorFor(model => model.VehicleRegistration)
             @Html.ValidationMessageFor(model => model.VehicleRegistration)
         </div>
 
-        <div class="editor-label">
+        <div hidden class="vehicle-label">
             @Html.LabelFor(model => model.VehicleOwner)
         </div>
-        <div class="editor-field">
+        <div hidden class="vehicle-field">
             @Html.EditorFor(model => model.VehicleOwner)
             @Html.ValidationMessageFor(model => model.VehicleOwner)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Passenger)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Passenger)
-            @Html.ValidationMessageFor(model => model.Passenger)
         </div>
 
         <div class="editor-label">
@@ -112,46 +119,40 @@
             @Html.LabelFor(model => model.Accommodation)
         </div>
         <div class="editor-field">
-            @Html.CheckBoxFor(model => model.Accommodation, new { Id = "AccommodationCheckbox" })
+            @Html.CheckBoxFor(model => model.Accommodation, new { Id = "AccommodationCheckbox", @checked = "checked" })
             @Html.ValidationMessageFor(model => model.Accommodation)
         </div>
 
-        <div hidden class="accommodation-label-hidden">
-            @Html.LabelFor(model => model.AccommodationDays)
-        </div>
-        <div hidden class="accommodation-field-hidden">
-            @Html.TextBoxFor(model => model.AccommodationDays, new { id="DaysVisit" })
-            @Html.ValidationMessageFor(model => model.AccommodationDays)
-        </div>
-        <div hidden class="accommodation-field" id="DatesGroup">
-            <div id="DateBoxDiv1" class="NamesClass">
-		            <label>Datum: </label>
-                    <input type="text" name="datebox1" id="datebox1" class="Date" readonly="readonly"/>
+        @for (int i = 0; i < 30; i++)
+        {
+            <div class="accommodation-field" id="nights@(i)" hidden="hidden">     
+                @Html.LabelFor(model => model.AccommodationNights[i].Date)              
+                @Html.TextBoxFor(model => model.AccommodationNights[i].Date, new { @class = "Date", @readonly = "readonly", type = "date", id = "dateNight" + i })
             </div>
-        </div>
-        <input hidden type="button" id="addAccommodationDayButton" value="Dodaj dan" class="accommodation-button"/>
-        <input hidden type="button" id="removeAccommodationDayButton" value="Izbriši dan" class="accommodation-button"/>
+        }
+        <input type="button" class="accommodation-button" id="addNightButton" value="Dodaj noćenje"/>
+        <input type="button" class="accommodation-button" id="removeNightButton" value="Izbriši noćenje"/>
 
-        <div hidden class="accommodation-label">
+        <div class="accommodation-label">
             @Html.LabelFor(model => model.AccommodationEntry)
         </div>
-        <div hidden class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date", @readonly="readonly"})
+        <div class="accommodation-field">
+            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date", @readonly = "readonly", type = "date", Id = "entry" })
             @Html.ValidationMessageFor(model => model.AccommodationEntry)
         </div>
 
-        <div hidden class="accommodation-label">
+        <div class="accommodation-label">
             @Html.LabelFor(model => model.AccommodationExit)
         </div>
-        <div hidden class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", @readonly="readonly"})
+        <div class="accommodation-field">
+            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", @readonly = "readonly", type = "date", Id = "exit" })
             @Html.ValidationMessageFor(model => model.AccommodationExit)
         </div>
 
-        <div hidden class="accommodation-label">
+        <div class="accommodation-label">
             @Html.LabelFor(model => model.Comment)
         </div>
-        <div hidden class="accommodation-field">
+        <div class="accommodation-field">
             @Html.EditorFor(model => model.Comment)
             @Html.ValidationMessageFor(model => model.Comment)
         </div>

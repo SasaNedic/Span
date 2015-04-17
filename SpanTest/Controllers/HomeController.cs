@@ -22,7 +22,9 @@ namespace SpanTest.Controllers
 
         public ActionResult PutniNalog()
         {
-            return View();
+            SpanTest.Models.PutniNalog Nalog = new SpanTest.Models.PutniNalog();
+            Nalog.Accommodation = true;
+            return View(Nalog);
         }
     }
 }

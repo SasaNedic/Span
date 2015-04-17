@@ -12,20 +12,25 @@ namespace SpanTest.Models
     public class PutniNalog
     {
         [Required]
-        [Display(Name="Imena osoba koja idu")]
-        public string Name { get; set; }
+        [Display(Name="Lista putnika")]
+        public List<Putnik> Name { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Datum početka")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime StartingDay { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        public string StartingDay { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Datum kraja")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime EndingDay { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        public string EndingDay { get; set; }
+
+        public List<string> VehicleDropDownList = new List<string>{
+            "Autobus",
+            "Automobil",
+            "Vlak",
+            "Zrakoplov",
+        };
 
         [Required]
         [Display(Name="Prevozno sredstvo")]
@@ -36,9 +41,6 @@ namespace SpanTest.Models
 
         [Display(Name = "Vlasnik vozila")]
         public string VehicleOwner { get; set; }
-
-        [Display(Name = "Suvozač")]
-        public bool Passenger { get; set; }
 
         [Required]
         [Display(Name = "Razlog dolaska")]
@@ -55,10 +57,8 @@ namespace SpanTest.Models
         [Display(Name = "Potreban smještaj")]
         public bool Accommodation{ get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Dani noćenja")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
-        public DateTime AccommodationDays { get; set; }
+        [Display(Name = "Datumi noćenja")]
+        public List<DateTime> AccommodationNights { get; set; } 
 
         [Display(Name = "Ulaz u smještaj")]
         public string AccommodationEntry { get; set; }
@@ -72,6 +72,7 @@ namespace SpanTest.Models
     public class Putnik
     {
         [Required]
+        [Display(Name = "Ime")]
         public string Name { get; set; }
 
         [Display(Name = "Suvozač")]
@@ -80,6 +81,7 @@ namespace SpanTest.Models
         [Display(Name = "Student")]
         public bool Student { get; set; }
     }
+    
 
     public class PutniNalogContext : DbContext
     {

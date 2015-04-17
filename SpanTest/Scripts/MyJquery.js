@@ -1,68 +1,49 @@
 ﻿var nameCounter = 1;
-var dateCounter = 1;
+var nightCounter = 0;
 $(document).ready(function () {
-
-
-    /*----- add textboxes for dates -----*/
-    $("#addAccommodationDayButton").click(function () {
-        /*  ADD max i min date iz #to i #from
-        if (dateCounter > 10) {
-        alert("Možete");
-        return false;
+    /*----- add boxes for nights -----*/
+    $("#addNightButton").click(function () {
+        if (nameCounter == 29) {
+            alert("Možete prenociti samo 30 dana")
         }
-        */
-        dateCounter++;
-
-        var newTextBoxDiv = $(document.createElement('div'))
-	     .attr({ id: 'DateTextBoxDiv' + dateCounter, class: 'NamesClass' });
-
-        newTextBoxDiv.after().html('<label>Datum: </label>' +
-	      '<input type="text" name="datebox' + dateCounter +
-	      '" id="datebox' + dateCounter + '"readonly="readonly" class="Date"/>');
-
-        newTextBoxDiv.appendTo("#DatesGroup");
+        else {
+            var nameDiv = "#nights" + nightCounter;
+            $(nameDiv).show();
+            nightCounter++;
+        }
     });
-
-    $("#removeAccommodationDayButton").click(function () {
-        if (dateCounter == 0) {
-            alert("Nema više datuma za brisanje");
-            return false;
+    $("#removeNightButton").click(function () {
+        if (nightCounter == 0) {
+            alert("Nema više noćenja koje možete izbrisati");
+        }
+        else {
+            nightCounter--;
+            var nameDiv = "#nights" + nightCounter;
+            $(nameDiv).hide();
         }
 
-        $("#DateTextBoxDiv" + dateCounter).remove();
-
-        dateCounter--;
     });
     /*----- add textboxes for names -----*/
     $("#addPersonButton").click(function () {
-
-        if (nameCounter > 10) {
-            alert("Možete tražiti putne naloge samo za 10 ljudi");
-            return false;
+        if (nameCounter == 9) {
+            alert("Možete tražiti putne naloge najviše za 10 ljudi")
         }
-        nameCounter++;
-
-        var newTextBoxDiv = $(document.createElement('div'))
-	     .attr({ id: 'NamesTextBoxDiv' + nameCounter, class: 'NamesClass' });
-
-        newTextBoxDiv.after().html('<label>Name: </label>' +
-	      '<input type="text" name="textbox' + nameCounter +
-	      '" id="textbox' + nameCounter + '" value=""/><label> Student:</label><input type="checkbox" name="checkboxStudent' +
-          nameCounter + '" id="checkboxStudent' + nameCounter + '"/><label> Suvozač:</label><input type="checkbox" name="checkboxPassenger' +
-          nameCounter + '" id="checkboxPassenger' + nameCounter + '"/>');
-
-        newTextBoxDiv.appendTo("#NamesGroup");
+        else {
+            var nameDiv = "#name-field" + nameCounter;
+            $(nameDiv).show();
+            nameCounter++;
+        }
     });
-
     $("#removePersonButton").click(function () {
         if (nameCounter == 1) {
-            alert("Mora postojati barem jedna osoba koja ide na put");
-            return false;
+            alert("Mora postojati barem jedan putnik");
+        }
+        else {
+            nameCounter--;
+            var nameDiv = "#name-field" + nameCounter;
+            $(nameDiv).hide();       
         }
 
-        $("#TextBoxDiv" + nameCounter).remove();
-
-        nameCounter--;
     });
 
     /*----- datepickers -----*/
@@ -98,6 +79,17 @@ $(document).ready(function () {
             $(".accommodation-label").hide();
             $(".accommodation-field").hide();
             $(".accommodation-button").hide();
+        }
+    });
+
+    $("#VehicleType").change(function () {
+        if ($("#VehicleType option:selected").text() == "Automobil") {
+            $(".vehicle-label").show();
+            $(".vehicle-field").show();
+        }
+        else {
+            $(".vehicle-label").hide();
+            $(".vehicle-field").hide();
         }
     });
 });
