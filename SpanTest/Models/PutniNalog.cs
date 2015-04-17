@@ -16,13 +16,15 @@ namespace SpanTest.Models
         public List<Putnik> Name { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Datum početka")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string StartingDay { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Datum kraja")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string EndingDay { get; set; }
 
         public List<string> VehicleDropDownList = new List<string>{
@@ -36,9 +38,11 @@ namespace SpanTest.Models
         [Display(Name="Prevozno sredstvo")]
         public string Vehicle { get; set; }
 
+        [Required]
         [Display(Name = "Registracija vozila")]
         public string VehicleRegistration { get; set; }
-
+        
+        [Required]
         [Display(Name = "Vlasnik vozila")]
         public string VehicleOwner { get; set; }
 
@@ -58,12 +62,18 @@ namespace SpanTest.Models
         public bool Accommodation{ get; set; }
 
         [Display(Name = "Datumi noćenja")]
-        public List<DateTime> AccommodationNights { get; set; } 
+        public List<DateTime?> AccommodationNights { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Ulaz u smještaj")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string AccommodationEntry { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Izlaz iz smještaj")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string AccommodationExit { get; set; }
 
         [Display(Name = "Komentar")]

@@ -55,7 +55,7 @@
             @Html.LabelFor(model => model.StartingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.StartingDay, new { Id = "from", type = "date", @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.StartingDay, new { Id = "from", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.StartingDay)
         </div>
 
@@ -63,7 +63,7 @@
             @Html.LabelFor(model => model.EndingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to", type = "date", @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.EndingDay)
         </div>
 
@@ -126,8 +126,8 @@
         @for (int i = 0; i < 30; i++)
         {
             <div class="accommodation-field" id="nights@(i)" hidden="hidden">     
-                @Html.LabelFor(model => model.AccommodationNights[i].Date)              
-                @Html.TextBoxFor(model => model.AccommodationNights[i].Date, new { @class = "Date", @readonly = "readonly", type = "date", id = "dateNight" + i })
+                @Html.LabelFor(model => model.AccommodationNights[i].Value)              
+                @Html.TextBoxFor(model => model.AccommodationNights[i].Value, new { @class = "Date", @readonly = "readonly", id = "dateNight" + i })
             </div>
         }
         <input type="button" class="accommodation-button" id="addNightButton" value="Dodaj noćenje"/>
