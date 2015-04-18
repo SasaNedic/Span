@@ -1,6 +1,7 @@
 ﻿var nameCounter = 1;
 var nightCounter = 0;
 $(document).ready(function () {
+
     /*----- add boxes for nights -----*/
     $("#addNightButton").click(function () {
         if (nameCounter == 29) {

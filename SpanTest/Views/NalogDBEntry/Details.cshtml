@@ -1,0 +1,95 @@
+﻿@model SpanTest.Models.NalogDBEntry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>NalogDBEntry</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Passenger</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Passenger)
+    </div>
+
+    <div class="display-label">Student</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Student)
+    </div>
+
+    <div class="display-label">StartingDay</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartingDay)
+    </div>
+
+    <div class="display-label">EndingDay</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndingDay)
+    </div>
+
+    <div class="display-label">Vehicle</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Vehicle)
+    </div>
+
+    <div class="display-label">VehicleRegistration</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VehicleRegistration)
+    </div>
+
+    <div class="display-label">VehicleOwner</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VehicleOwner)
+    </div>
+
+    <div class="display-label">Reason</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reason)
+    </div>
+
+    <div class="display-label">TravelRelation</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TravelRelation)
+    </div>
+
+    <div class="display-label">ProjectNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectNumber)
+    </div>
+
+    <div class="display-label">Accommodation</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Accommodation)
+    </div>
+
+    <div class="display-label">AccommodationNights</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccommodationNights)
+    </div>
+
+    <div class="display-label">AccommodationEntry</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccommodationEntry)
+    </div>
+
+    <div class="display-label">AccommodationExit</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccommodationExit)
+    </div>
+
+    <div class="display-label">Comment</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comment)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

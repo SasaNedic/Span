@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Email";
-
+    
     //Loading all items needed from form
     List<string> agentName = new List<string>();
     List<string> agentPassenger = new List<string>();
@@ -84,7 +84,7 @@
         }
     }
     EmailBodyText = EmailBodyText + "<br/> Putovanje počinje " + startingDay + " te završava " + endingDay + ".<br/>";
-    EmailBodyText = EmailBodyText + "Relacija putovanja je " + travelRelation + ".<br/>";
+    EmailBodyText = EmailBodyText + "Relacija putovanja je " + travelRelation + ".<br/><br/>";
 
     EmailBodyText = EmailBodyText + "Sredstvo putovanja će biti " + vehicle;
     if(vehicle=="Automobil")
@@ -140,13 +140,14 @@
         }
         EmailBodyText = EmailBodyText + "U smještaj bi ušli " + accommodationEntry + " te ga napustili " + accommodationExit + ".<br/><br/>";
     }
-    EmailBodyText = EmailBodyText + "<br/>Razlog putovanja je " + reason + ".<br/>";
-    EmailBodyText = EmailBodyText + "Putovanje se vodi na projekt pod brojem: " + projectNumber + ".<br/>";
+    EmailBodyText = EmailBodyText + "<br/><br/>Razlog putovanja je " + reason + ".<br/><br/>";
+    EmailBodyText = EmailBodyText + "Putovanje se vodi na projekt pod brojem: " + projectNumber + ".<br/><br/>";
 
     EmailBodyText = EmailBodyText + "<br/> Lijep pozdrav, <br/>" + agentName[0];
-    
-    
-        //trying to send the mail
+
+    var ccField = Request["ccMail"];
+
+    //EMAIL WORKS, need real account for it
     try
     {
         WebMail.SmtpServer = "smtp.gmail.com";
@@ -159,7 +160,7 @@
         WebMail.Send(to: "sasa.morpheus.nedic@gmail.com",
             subject: "Putni nalog " + travelRelation,
             body: EmailBodyText,
-            cc: "email-managera@span.eu"
+            cc: ccField
             );
         //gmail wont work without SSL, and Access for less secure apps
     }
@@ -170,14 +171,16 @@
 }
 <h2>Email</h2>
 
-@if(errorMessage == "")
-{
-    <p>Vaš zahtjev je uspješno poslan</p>
-}
-else
-{
-    <p>Došlo je do greške pri slanju zahtjeva, molimo probajte kasnije</p>
-}
+    @if(errorMessage == "")
+    {
+        <p>Vaš zahtjev je uspješno poslan</p>
+    }
+    else
+    {
+        <p>Došlo je do greške pri slanju zahtjeva, molimo probajte kasnije</p>
+    }
+        
+   
 <div>
     @Html.ActionLink("Back to Home", "Index")
 </div>

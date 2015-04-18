@@ -1,0 +1,126 @@
+﻿@model IEnumerable<SpanTest.Models.NalogDBEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Passenger
+        </th>
+        <th>
+            Student
+        </th>
+        <th>
+            StartingDay
+        </th>
+        <th>
+            EndingDay
+        </th>
+        <th>
+            Vehicle
+        </th>
+        <th>
+            VehicleRegistration
+        </th>
+        <th>
+            VehicleOwner
+        </th>
+        <th>
+            Reason
+        </th>
+        <th>
+            TravelRelation
+        </th>
+        <th>
+            ProjectNumber
+        </th>
+        <th>
+            Accommodation
+        </th>
+        <th>
+            AccommodationNights
+        </th>
+        <th>
+            AccommodationEntry
+        </th>
+        <th>
+            AccommodationExit
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            AccommodationPeople
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passenger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartingDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndingDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleRegistration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleOwner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TravelRelation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accommodation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccommodationNights)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccommodationEntry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccommodationExit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccommodationPeople)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
