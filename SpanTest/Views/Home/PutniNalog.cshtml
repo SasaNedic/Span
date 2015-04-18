@@ -55,7 +55,7 @@
             @Html.LabelFor(model => model.StartingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.StartingDay, new { Id = "from", @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.StartingDay, new { Id = "from", type = "date" })
             @Html.ValidationMessageFor(model => model.StartingDay)
         </div>
 
@@ -63,7 +63,7 @@
             @Html.LabelFor(model => model.EndingDay)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to", @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.EndingDay, new { Id = "to", type = "date" })
             @Html.ValidationMessageFor(model => model.EndingDay)
         </div>
 
@@ -127,7 +127,7 @@
         {
             <div class="accommodation-field-night" id="nights@(i)" hidden="hidden">     
                 @Html.LabelFor(model => model.AccommodationNights[i].Value, "Datum noćenja")              
-                @Html.TextBoxFor(model => model.AccommodationNights[i].Value, new { @class = "Date", @readonly = "readonly", id = "dateNight" + i })
+                @Html.TextBoxFor(model => model.AccommodationNights[i].Value, new { @class = "Date", type = "date", id = "dateNight" + i })
             </div>
         }
         <input type="button" class="accommodation-button" id="addNightButton" value="Dodaj noćenje"/>
@@ -137,7 +137,7 @@
             @Html.LabelFor(model => model.AccommodationEntry)
         </div>
         <div class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date", @readonly = "readonly", type = "date", Id = "entry" })
+            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date",type = "date", Id = "entry" })
             @Html.ValidationMessageFor(model => model.AccommodationEntry)
         </div>
 
@@ -145,7 +145,7 @@
             @Html.LabelFor(model => model.AccommodationExit)
         </div>
         <div class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", @readonly = "readonly", type = "date", Id = "exit" })
+            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", type = "date", Id = "exit" })
             @Html.ValidationMessageFor(model => model.AccommodationExit)
         </div>
 

@@ -41,7 +41,7 @@ $(document).ready(function () {
         else {
             nameCounter--;
             var nameDiv = "#name-field" + nameCounter;
-            $(nameDiv).hide();       
+            $(nameDiv).hide();
         }
 
     });
@@ -67,7 +67,15 @@ $(document).ready(function () {
             dateFormat: "dd/mm/yy"
         });
     });
-
+    $(".Date").keydown(function (event) {
+        event.preventDefault();
+    });
+    $("#from").keydown(function (event) {
+        event.preventDefault();
+    });
+    $("#to").keydown(function (event) {
+        event.preventDefault();
+    });
     /*----- show if needed -----*/
     $("#AccommodationCheckbox").change(function () {
         if (this.checked) {
