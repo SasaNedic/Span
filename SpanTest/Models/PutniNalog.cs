@@ -16,8 +16,9 @@ namespace SpanTest.Models
         public List<Putnik> Name { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Datum početka")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string StartingDay { get; set; }
 
         [Required]
