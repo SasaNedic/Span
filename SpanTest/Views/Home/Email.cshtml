@@ -64,46 +64,47 @@
     
     
     string errorMessage="";
-    string EmailBodyText = "Pozdrav, \r\n\r\n Zamolio bih za " + nonEmptyAgent +" ";
+    string EmailBodyText = "Pozdrav, <br/><br/> Zamolio bih za " + nonEmptyAgent +" ";
     if(passNonStud == 1)
     {
-        EmailBodyText = EmailBodyText + "putni nalog za:\r\n";
+        EmailBodyText = EmailBodyText + "putni nalog za:<br/>";
     }
     else if (passNonStud > 1 && passNonStud < 5)
     {
-        EmailBodyText = EmailBodyText + "putna naloga za:\r\n";
+        EmailBodyText = EmailBodyText + "putna naloga za:<br/>";
     }
     else{
-        EmailBodyText = EmailBodyText + "putnih naloga za:\r\n";
+        EmailBodyText = EmailBodyText + "putnih naloga za:<br/>";
     }
     for (int i = 0; i < nonEmptyAgent; i++)
     {
         if(agentStudent[i] == "false")
         {
-            EmailBodyText = EmailBodyText + agentName[i] + "\r\n";
+            EmailBodyText = EmailBodyText + agentName[i] + "<br/>";
         }
     }
-    EmailBodyText = EmailBodyText + "\r\n Putovanje počinje " + startingDay + " te završava " + endingDay + ".\r\n";
-    EmailBodyText = EmailBodyText + "Relacija putovanja je " + travelRelation + ".\r\n";
+    EmailBodyText = EmailBodyText + "<br/> Putovanje počinje " + startingDay + " te završava " + endingDay + ".<br/>";
+    EmailBodyText = EmailBodyText + "Relacija putovanja je " + travelRelation + ".<br/>";
 
     EmailBodyText = EmailBodyText + "Sredstvo putovanja će biti " + vehicle;
     if(vehicle=="Automobil")
     {
-        EmailBodyText = EmailBodyText + " u vlasništvu " + vehicleOwner + " sa registracijom " + vehicleRegistration + ".\r\n";
+        EmailBodyText = EmailBodyText + " u vlasništvu " + vehicleOwner + " sa registracijom " + vehicleRegistration;
     }
+    EmailBodyText = EmailBodyText + ".";
     
     if(accommodation == "true")
     {
-        EmailBodyText = EmailBodyText + "Potreban je i smještaj za ";
+        EmailBodyText = EmailBodyText + "<br/>Potreban je i smještaj za ";
         if(nonEmptyAgent == 1){
-            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobu za sljedeće datume:\r\n";
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobu za sljedeće datume:<br/>";
         }
         else if(nonEmptyAgent >1 && nonEmptyAgent< 5)
         {
-            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobe za sljedeće datume:\r\n";
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osobe za sljedeće datume:<br/>";
         }
         else{
-            EmailBodyText = EmailBodyText + nonEmptyAgent + " osoba za sljedeće datume:\r\n";
+            EmailBodyText = EmailBodyText + nonEmptyAgent + " osoba za sljedeće datume:<br/>";
         }
 
         int nonEmptyNights = 0;
@@ -118,59 +119,65 @@
         for(int i=0; i<nonEmptyNights;i++)
         {
             if(i%5==0){
-                EmailBodyText = EmailBodyText + accommodationNights[i] + ",\r\n";
+                EmailBodyText = EmailBodyText + accommodationNights[i] + ",<br/>";
             }
             else if(i+1 == accommodationNights.Count()){
-                EmailBodyText = EmailBodyText + accommodationNights[i] + ".\r\n";
+                EmailBodyText = EmailBodyText + accommodationNights[i] + ".";
             }
             else{
                 EmailBodyText = EmailBodyText + accommodationNights[i] + ",";
             }
         }
-        EmailBodyText = EmailBodyText + "Smještaj je namjenjen za: ";
+        EmailBodyText = EmailBodyText + "<br/>Smještaj je namjenjen za: ";
         for(int i=0; i<nonEmptyAgent;i++)
         {
             if(agentStudent[i] =="false"){
-                EmailBodyText = EmailBodyText + agentName[i] + "\r\n";
+                EmailBodyText = EmailBodyText + agentName[i] + "<br/>";
             }
             else{
-                EmailBodyText = EmailBodyText + agentName[i] + "(student)\r\n";
+                EmailBodyText = EmailBodyText + agentName[i] + "(student)<br/>";
             }
         }
-        EmailBodyText = EmailBodyText + "U smještaj bi ušli " + accommodationEntry + " te ga napustili " + accommodationExit + ".\r\n\r\n";
+        EmailBodyText = EmailBodyText + "U smještaj bi ušli " + accommodationEntry + " te ga napustili " + accommodationExit + ".<br/><br/>";
     }
-    EmailBodyText = EmailBodyText + "Razlog putovanja je " + reason + ".\r\n";
-    EmailBodyText = EmailBodyText + "Putovanje se vodi na projekt pod brojem: " + projectNumber + ".\r\n";
+    EmailBodyText = EmailBodyText + "<br/>Razlog putovanja je " + reason + ".<br/>";
+    EmailBodyText = EmailBodyText + "Putovanje se vodi na projekt pod brojem: " + projectNumber + ".<br/>";
 
-    EmailBodyText = EmailBodyText + "Lijep pozdrav, \r\n" + agentName[0];
+    EmailBodyText = EmailBodyText + "<br/> Lijep pozdrav, <br/>" + agentName[0];
     
     
         //trying to send the mail
-    try{
-        WebMail.SmtpServer = "your-smtp-host";
-        WebMail.SmtpPort = 25;
-        WebMail.UserName = "your-username-here";
-        WebMail.Password = "your-password-here";
-        WebMail.From = "your-email-here";
-
-        WebMail.Send(to: "trenutno-nebitno@span.eu",
+    try
+    {
+        WebMail.SmtpServer = "smtp.gmail.com";
+        WebMail.SmtpPort = 587;
+        WebMail.UserName = "sasa.morpheus.nedic@gmail.com";
+        WebMail.Password = "******";
+        WebMail.From = "sasa.morpheus.nedic@gmail.com";
+        WebMail.EnableSsl = true;
+        //password removed because its my actual password
+        WebMail.Send(to: "sasa.morpheus.nedic@gmail.com",
             subject: "Putni nalog " + travelRelation,
             body: EmailBodyText,
             cc: "email-managera@span.eu"
             );
+        //gmail wont work without SSL, and Access for less secure apps
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
         errorMessage = ex.Message;
     }
 }
 <h2>Email</h2>
-<p>@EmailBodyText</p>
-@*@if (errorMessage == "")
+
+@if(errorMessage == "")
 {
-      <p>Message sent</p>
+    <p>Vaš zahtjev je uspješno poslan</p>
 }
 else
 {
-    <p>Message not sent</p>
-}*@
+    <p>Došlo je do greške pri slanju zahtjeva, molimo probajte kasnije</p>
+}
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
