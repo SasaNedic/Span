@@ -27,12 +27,12 @@ namespace SpanTest.Models
         [DataType(DataType.Date)]
         [Display(Name = "Datum početka")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime StartingDay { get; set; }
+        public DateTime? StartingDay { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Datum kraja")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime EndingDay { get; set; }
+        public DateTime? EndingDay { get; set; }
 
         [Display(Name = "Prevozno sredstvo")]
         public string Vehicle { get; set; }

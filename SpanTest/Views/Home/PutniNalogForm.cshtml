@@ -122,6 +122,22 @@
             @Html.ValidationMessageFor(model => model.Accommodation)
         </div>
 
+        <div class="accommodation-label">
+            @Html.LabelFor(model => model.AccommodationEntry)
+        </div>
+        <div class="accommodation-field">
+            @Html.TextBoxFor(model => model.AccommodationEntry, new { type = "date", Id = "entry" })
+            @Html.ValidationMessageFor(model => model.AccommodationEntry)
+        </div>
+
+        <div class="accommodation-label">
+            @Html.LabelFor(model => model.AccommodationExit)
+        </div>
+        <div class="accommodation-field">
+            @Html.TextBoxFor(model => model.AccommodationExit, new { type = "date", Id = "exit" })
+            @Html.ValidationMessageFor(model => model.AccommodationExit)
+        </div>
+
         @for (int i = 0; i < 30; i++)
         {
             <div class="accommodation-field-night" id="nights@(i)" hidden="hidden">     
@@ -131,22 +147,6 @@
         }
         <input type="button" class="accommodation-button" id="addNightButton" value="Dodaj noćenje"/>
         <input type="button" class="accommodation-button" id="removeNightButton" value="Izbriši noćenje"/>
-
-        <div class="accommodation-label">
-            @Html.LabelFor(model => model.AccommodationEntry)
-        </div>
-        <div class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationEntry, new { @class = "Date",type = "date", Id = "entry" })
-            @Html.ValidationMessageFor(model => model.AccommodationEntry)
-        </div>
-
-        <div class="accommodation-label">
-            @Html.LabelFor(model => model.AccommodationExit)
-        </div>
-        <div class="accommodation-field">
-            @Html.TextBoxFor(model => model.AccommodationExit, new { @class = "Date", type = "date", Id = "exit" })
-            @Html.ValidationMessageFor(model => model.AccommodationExit)
-        </div>
 
         <div class="accommodation-label">
             @Html.LabelFor(model => model.Comment)

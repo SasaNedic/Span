@@ -50,24 +50,43 @@ $(document).ready(function () {
     /*----- datepickers -----*/
     $("#from").datepicker({
         dateFormat: "dd/mm/yy",
-        defaultDate: "+1w",
         onClose: function (selectedDate) {
             $("#to").datepicker("option", "minDate", selectedDate);
+            $("#exit").datepicker("option", "minDate", selectedDate);
+            $("#entry").datepicker("option", "minDate", selectedDate);
         }
     });
     $("#to").datepicker({
         dateFormat: "dd/mm/yy",
-        defaultDate: "+1w",
         onClose: function (selectedDate) {
             $("#from").datepicker("option", "maxDate", selectedDate);
+            $("#entry").datepicker("option", "maxDate", selectedDate);
+            $("#exit").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+
+    $("#entry").datepicker({
+        dateFormat: "dd/mm/yy",
+        onClose: function (selectedDate) {
+            $("#exit").datepicker("option", "minDate", selectedDate);
+        }
+    });
+
+    $("#exit").datepicker({
+        dateFormat: "dd/mm/yy",
+        onClose: function (selectedDate) {
+            $("#entry").datepicker("option", "maxDate", selectedDate);
         }
     });
 
     $(document).on("focus", ".Date", function () {
-        $(this).datepicker({
-            dateFormat: "dd/mm/yy"
+        $(".Date").datepicker({
+            dateFormat: "dd/mm/yy",
+            minDate: $.datepicker.parseDate("dd/mm/yy", $("#entry").val()),
+            maxDate: $.datepicker.parseDate("dd/mm/yy", $("#exit").val())
         });
     });
+
     $(".Date").keydown(function (event) {
         event.preventDefault();
     });
